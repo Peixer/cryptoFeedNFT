@@ -75,7 +75,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           {images.map(({ id, media_url }) => (
             <Image
               alt="Next.js Conf photo"
-              className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+              className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 mb-5"
               style={{ transform: "translate3d(0, 0, 0)" }}
               placeholder="blur"
               id={id}
