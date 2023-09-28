@@ -20,7 +20,7 @@ export default async function handler(
     {
       input: {
         prompt: "Cyberpunk 2077, with a cyberpunk filter",
-        image: "https://ibb.co/T08mRB8",
+        image: "https://i.ibb.co/C97hv57/1-22-7-25-15-57-20m.jpg",
       },
     }
   );
