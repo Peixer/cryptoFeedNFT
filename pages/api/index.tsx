@@ -6,9 +6,6 @@ type ResponseData = {
   message: string;
   output: string;
 };
-type RequestData = {
-  message: string;
-};
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,7 +20,7 @@ export default async function handler(
     {
       input: {
         prompt: "Cyberpunk 2077, with a cyberpunk filter",
-        image: req.body.media_url,
+        image: "https://ibb.co/T08mRB8",
       },
     }
   );
