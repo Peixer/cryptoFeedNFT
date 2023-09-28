@@ -46,14 +46,14 @@ export default function Modal({
       initialFocus={overlayRef}
       className="fixed inset-0 z-10 flex items-center justify-center"
     >
-      <Dialog.Overlay
+      {/* <Dialog.Overlay
         ref={overlayRef}
         as={motion.div}
         key="backdrop"
         className="fixed inset-0 z-30 bg-black/70 backdrop-blur-2xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-      />
+      /> */}
       <Image
         alt="Next.js Conf photo"
         className="mb-5 transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
