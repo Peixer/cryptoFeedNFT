@@ -27,5 +27,5 @@ export default async function handler(
 
   res
     .status(200)
-    .json({ message: "Hello from Next.js!", output: JSON.stringify(output) });
+    .json({ message: "Hello from Next.js!", output: output[0] });
 }
