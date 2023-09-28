@@ -4,7 +4,7 @@ export interface ImageProps {
   media_type: string;
   media_url: string;
   username: string;
-  timestamp: string;
+  timestamp?: string;
 }
 
 export interface SharedModalProps {

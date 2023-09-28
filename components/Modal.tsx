@@ -1,59 +1,42 @@
-import { Dialog } from '@headlessui/react'
-import { motion } from 'framer-motion'
-import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
-import useKeypress from 'react-use-keypress'
-import type { ImageProps } from '../utils/types'
-import SharedModal from './SharedModal'
+import { Dialog } from "@headlessui/react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import axios from "axios";
 
 export default function Modal({
-  images,
+  media_url,
   onClose,
 }: {
-  images: ImageProps[]
-  onClose?: () => void
+  media_url: string;
+  onClose?: () => void;
 }) {
-  let overlayRef = useRef()
-  const router = useRouter()
-
-  const { photoId } = router.query
-  let index = Number(photoId)
-
-  const [direction, setDirection] = useState(0)
-  const [curIndex, setCurIndex] = useState(index)
+  let overlayRef = useRef();
+  const router = useRouter();
+  const [media, setMedia] = useState(media_url);
 
   function handleClose() {
-    router.push('/', undefined, { shallow: true })
-    onClose()
+    router.push("/", undefined, { shallow: true });
+    onClose();
   }
 
-  function changePhotoId(newVal: number) {
-    if (newVal > index) {
-      setDirection(1)
-    } else {
-      setDirection(-1)
-    }
-    setCurIndex(newVal)
-    router.push(
-      {
-        query: { photoId: newVal },
-      },
-      `/p/${newVal}`,
-      { shallow: true }
-    )
+  async function generateAIImage(media_url) {
+    debugger;
+    const response = await axios.post("/api", {
+      media_url,
+    });
+    console.log(response.data);
+    setMedia(response.data.output);
   }
 
-  useKeypress('ArrowRight', () => {
-    if (index + 1 < images.length) {
-      changePhotoId(index + 1)
+  useEffect(() => {
+    if (media_url) {
+      generateAIImage(media_url).then(() => {
+        console.log("done");
+      });
     }
-  })
-
-  useKeypress('ArrowLeft', () => {
-    if (index > 0) {
-      changePhotoId(index - 1)
-    }
-  })
+  }, [media_url]);
 
   return (
     <Dialog
@@ -71,14 +54,20 @@ export default function Modal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       />
-      <SharedModal
-        index={curIndex}
-        direction={direction}
-        images={images}
-        changePhotoId={changePhotoId}
-        closeModal={handleClose}
-        navigation={true}
+      <Image
+        alt="Next.js Conf photo"
+        className="mb-5 transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+        style={{ transform: "translate3d(0, 0, 0)" }}
+        placeholder="blur"
+        src={media}
+        blurDataURL={media}
+        width={720}
+        height={480}
+        sizes="(max-width: 640px) 100vw,
+            (max-width: 1280px) 50vw,
+            (max-width: 1536px) 33vw,
+            25vw"
       />
     </Dialog>
-  )
+  );
 }

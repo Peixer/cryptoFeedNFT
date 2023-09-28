@@ -9,7 +9,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
-    "axios": "^1.5.1",
+    "axios": "^1",
+    "axios-cache-interceptor": "^1",
     "cloudinary": "^1.32.0",
     "eslint-config-next": "^13.0.1",
     "framer-motion": "^7.6.4",
