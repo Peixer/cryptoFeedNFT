@@ -11,6 +11,10 @@ module.exports = {
         protocol: "https",
         hostname: "**.cdninstagram.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.replicate.delivery",
+      },
     ],
   },
 };
