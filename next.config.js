@@ -4,7 +4,7 @@ module.exports = {
     domains: [
       "res.cloudinary.com",
       "scontent.cdninstagram.com",
-      "https://scontent-iad3-1.cdninstagram.com/",
+      "*.cdninstagram.com",
     ],
   },
 };
