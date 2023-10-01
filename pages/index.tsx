@@ -3,8 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import type { ImageProps } from "../utils/types";
 import Axios from "axios";
-import { AxiosCacheInstance, setupCache } from "axios-cache-interceptor";
+import { setupCache } from "axios-cache-interceptor";
 import Link from "next/link";
+import { useIdentity } from "../lib/withIdentity";
+import { useEffect, useState } from "react";
 
 const axiosCache = Axios as any;
 
@@ -14,7 +16,40 @@ if (!axiosCache.defaults.cache) {
   });
 }
 
-const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
+const Home: NextPage = () => {
+  const [images, setImages] = useState<ImageProps[]>([]);
+  const identity = useIdentity();
+  if (!identity) {
+    return null;
+  }
+  
+  async function getUserPhotos() {
+    const access_token = identity.accessToken;
+    const userId = identity.profile.id;
+    // This is not good because there is a limit for the media consumption
+    const medias = await Axios.get(
+      `https://graph.instagram.com/v18.0/${userId}/media?access_token=${access_token}`,
+      {}
+    );
+    let promises = [];
+    medias.data.data.forEach((media) => {
+      promises.push(
+        Axios.get(
+          `https://graph.instagram.com/${media.id}?access_token=${access_token}&fields=id,media_type,media_url,username,timestamp`
+        )
+      );
+    });
+
+    const results = (await Promise.all(promises)).map((res) => res.data);
+    setImages(results);
+  }
+
+  useEffect(() => {
+    if (identity && images.length === 0) {
+      getUserPhotos();
+    }
+  }, [identity]);
+
   return (
     <>
       <Head>
@@ -63,27 +98,10 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const access_token = process.env.INSTAGRAM_ACCESS_TOKEN;
-  const userId = 6549937128377215;
-  const medias = await Axios.get(
-    `https://graph.instagram.com/v18.0/${userId}/media?access_token=${access_token}`,
-    {}
-  );
-  let promises = [];
-  medias.data.data.forEach((media) => {
-    promises.push(
-      Axios.get(
-        `https://graph.instagram.com/${media.id}?access_token=${access_token}&fields=id,media_type,media_url,username,timestamp`
-      )
-    );
-  });
-
-  const results = (await Promise.all(promises)).map((res) => res.data);
-  console.log(results);
 
   return {
     props: {
-      images: results,
+      images: [],
     },
   };
 }

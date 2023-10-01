@@ -22,11 +22,9 @@ export default function Modal({
   }
 
   async function generateAIImage(media_url) {
-    debugger;
     const response = await axios.post("/api", {
       media_url,
     });
-    console.log(response.data);
     setMedia(response.data.output);
   }
 
