@@ -22,26 +22,23 @@ const Home: NextPage = () => {
   if (!identity) {
     return null;
   }
-  
-  async function getUserPhotos() {
-    const access_token = identity.accessToken;
-    const userId = identity.profile.id;
-    // This is not good because there is a limit for the media consumption
-    const medias = await Axios.get(
-      `https://graph.instagram.com/v18.0/${userId}/media?access_token=${access_token}`,
-      {}
-    );
-    let promises = [];
-    medias.data.data.forEach((media) => {
-      promises.push(
-        Axios.get(
-          `https://graph.instagram.com/${media.id}?access_token=${access_token}&fields=id,media_type,media_url,username,timestamp`
-        )
-      );
-    });
 
-    const results = (await Promise.all(promises)).map((res) => res.data);
-    setImages(results);
+  async function getUserPhotos() {
+    const mediaResponse = await Axios.get(`/api/medias`);
+
+    if (mediaResponse.data) {
+      setImages(
+        mediaResponse.data.medias.response.items.map((item: any) => {
+          return {
+            id: item.pk,
+            media_url: item.image_versions2.candidates[1].url,
+            media_type: item.media_type,
+            username: item.user.username,
+            timestamp: item.taken_at,
+          } as ImageProps;
+        })
+      );
+    }
   }
 
   useEffect(() => {
@@ -98,7 +95,6 @@ const Home: NextPage = () => {
 export default Home;
 
 export async function getStaticProps() {
-
   return {
     props: {
       images: [],

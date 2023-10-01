@@ -8,6 +8,8 @@ export interface UserIdentity {
   profile: {
     id: number;
     username: string;
+    full_name: string;
+    hikerId: string;
   }
   accessToken: string;
 }

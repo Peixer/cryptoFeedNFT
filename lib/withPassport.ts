@@ -14,11 +14,13 @@ export interface PassportSession {
 }
 
 passport.serializeUser((user: UserIdentity, done) => {
-  const { id, username } = user.profile;
+  const { id, username, hikerId, full_name } = user.profile;
   done(null, {
     profile: {
       id,
       username,
+      hikerId,
+      full_name,
     },
     accessToken: user.accessToken,
   });
@@ -44,9 +46,7 @@ export default (fn) => (req, res) => {
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })(req, res, () =>
     passport.initialize()(req, res, () =>
-      passport.session()(req, res, () =>
-        fn(req, res)
-      )
+      passport.session()(req, res, () => fn(req, res))
     )
   );
 };
