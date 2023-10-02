@@ -1,6 +1,4 @@
 import { NextPage } from "next";
-import { Head } from "next/document";
-import type { ImageProps } from "../../utils/types";
 import { useRouter } from "next/router";
 import Modal from "../../components/Modal";
 
