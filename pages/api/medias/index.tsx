@@ -1,13 +1,13 @@
-import Replicate from "replicate";
-
-import type { NextApiRequest, NextApiResponse } from "next";
-import withPassport from "../../../lib/withPassport";
+import type { NextApiResponse } from "next";
 import axios from "axios";
+import { authOptions } from "../auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
 const handler = async (req: any, res: NextApiResponse) => {
-  if (req.user) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
     const medias = await axios.get(
-      `https://api.hikerapi.com/v2/user/medias?user_id=${req.user.profile.hikerId}`,
+      `https://api.hikerapi.com/a2/user?username=${session.user.name}`,
       {
         headers: {
           accept: "application/json",
@@ -15,9 +15,16 @@ const handler = async (req: any, res: NextApiResponse) => {
         },
       }
     );
-    res.status(200).json({ medias: medias.data });
+
+    const mediaUrls =
+      medias.data.graphql.user.edge_owner_to_timeline_media.edges.map(
+        (media) => {
+          return media.node.display_url;
+        }
+      );
+    res.status(200).json({ medias: mediaUrls });
   }
   res.status(200).json({ medias: [] });
 };
 
-export default withPassport(handler);
+export default handler;
