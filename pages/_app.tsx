@@ -1,17 +1,19 @@
-import type { AppProps } from 'next/app'
-import App from 'next/app'
-import '../styles/index.css'
-import withIdentity from '../lib/withIdentity'
-
-// export default function MyApp({ Component, pageProps }: AppProps) {
-//   return <Component {...pageProps} />
-// }
+import App from "next/app";
+import { SessionProvider } from "next-auth/react";
+import "../styles/index.css";
 
 class MyApp extends App {
   render() {
-    const { Component, pageProps } = this.props
-    return <Component {...pageProps} />
+    const {
+      Component,
+      pageProps: { session, ...pageProps },
+    } = this.props;
+    return (
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    );
   }
 }
 
-export default withIdentity(MyApp)
+export default MyApp;

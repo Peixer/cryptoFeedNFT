@@ -20,6 +20,7 @@
     "imagemin-jpegtran": "^7.0.0",
     "micro-redirect": "^1.0.2",
     "next": "latest",
+    "next-auth": "^4.23.2",
     "next-cookies": "^2.0.3",
     "passport": "0.5",
     "passport-github": "^1.1.0",
