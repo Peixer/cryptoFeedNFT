@@ -18,8 +18,9 @@ export default async function handler(
     "stability-ai/sdxl:af1a68a271597604546c09c64aabcd7782c114a63539a4a8d14d1eeda5630c33",
     {
       input: {
-        prompt: "Cyberpunk 2077, with a cyberpunk filter",
+        prompt: "cartoon style with nostalgic pixel art look",
         image: req.body.media_url,
+
       },
     }
   );
