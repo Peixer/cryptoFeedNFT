@@ -30,8 +30,9 @@ const handler = async (req: any, res: NextApiResponse) => {
         );
       res.status(200).json({ medias: mediaUrls });
     }
+  } else {
+    res.status(200).json({ medias: [] });
   }
-  res.status(200).json({ medias: [] });
 };
 
 export default handler;
