@@ -8,7 +8,8 @@ const handler = async (req: any, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
   if (session) {
     let mediasResponse = {} as any;
-    if (process.env.NODE_ENV === "development") {
+    let useMockJson = true;
+    if (useMockJson) {
       mediasResponse = { data: JSON.parse(mockJson) };
     } else {
       mediasResponse = await axios.get(
