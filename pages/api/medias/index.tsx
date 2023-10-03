@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 
 export const mockJson = `
 {
+  "data":{
     "graphql": {
         "user": {
             "edge_owner_to_timeline_media": {
@@ -20,8 +21,8 @@ export const mockJson = `
             }
         }
     }
+  }
 }`;
-
 
 const handler = async (req: any, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
@@ -29,7 +30,7 @@ const handler = async (req: any, res: NextApiResponse) => {
     let mediasResponse = {} as any;
     let useMockJson = true;
     if (useMockJson) {
-      mediasResponse = { data: JSON.parse(mockJson) };
+      mediasResponse = JSON.parse(mockJson);
     } else {
       mediasResponse = await axios.get(
         `https://api.hikerapi.com/a2/user?username=${session.user.name}`,
