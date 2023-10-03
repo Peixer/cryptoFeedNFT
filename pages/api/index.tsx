@@ -3,7 +3,6 @@ import Replicate from "replicate";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
-  message: string;
   output: string;
 };
 
@@ -27,5 +26,5 @@ export default async function handler(
 
   res
     .status(200)
-    .json({ message: "Hello from Next.js!", output: output[0] });
+    .json({ output: output[0] });
 }
