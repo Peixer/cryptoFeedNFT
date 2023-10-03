@@ -16,11 +16,11 @@ export default async function handler(
   });
 
   const output = await replicate.run(
-    "stability-ai/stable-diffusion-img2img:15a3689ee13b0d2616e98820eca31d4c3abcd36672df6afce5cb6feb1d66087d",
+    "stability-ai/sdxl:af1a68a271597604546c09c64aabcd7782c114a63539a4a8d14d1eeda5630c33",
     {
       input: {
         prompt: "Cyberpunk 2077, with a cyberpunk filter",
-        image: "https://i.ibb.co/C97hv57/1-22-7-25-15-57-20m.jpg",
+        image: req.body.media_url,
       },
     }
   );
