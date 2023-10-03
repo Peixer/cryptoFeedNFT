@@ -2,13 +2,9 @@ import Replicate from "replicate";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type ResponseData = {
-  output: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse
 ) {
   try {
     const replicate = new Replicate({
@@ -25,9 +21,9 @@ export default async function handler(
       }
     );
 
-    res.status(200).json({ output: output[0] });
+    res.status(200).json({ message: "Sucess", output: output[0] });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ output: error });
+    res.status(500).json({ message: "Error", output: error });
   }
 }
