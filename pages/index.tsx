@@ -3,17 +3,38 @@ import Head from "next/head";
 import Image from "next/image";
 import type { ImageProps } from "../utils/types";
 import Link from "next/link";
-import { useState } from "react";
-import { signOut } from "next-auth/react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const WalletMultiButtonDynamic = dynamic(
+  async () =>
+    (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
+  { ssr: false }
+);
 
 const Home: NextPage = () => {
-  const [images, setImages] = useState<ImageProps[]>([]);
-  const [username, setUsername] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const initialUsername = (router.query.username as string) ?? "";
 
-  async function getUserPhotos(e) {
+  const [images, setImages] = useState<ImageProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [usernameField, setUsernameField] = useState<string>(initialUsername);
+  const [username, setUsername] = useState<string>(initialUsername);
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    router.push(`/?username=${usernameField}`, undefined);
+    if (!usernameField) {
+      setImages([]);
+      router.push("/");
+      return;
+    }
+    getUserPhotos();
+  }
+
+  const getUserPhotos = useCallback(async () => {
     setLoading(true);
     const mediaResponse = await axios.get(`/api/medias?username=${username}`);
 
@@ -33,7 +54,21 @@ const Home: NextPage = () => {
       );
     }
     setLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    const queryUsername = router.query.username as string;
+    if (!queryUsername) return setUsername("");
+    setUsername(queryUsername);
+  }, [router.query.username]);
+
+  useEffect(() => {
+    if (!username) {
+      setImages([]);
+      return;
+    }
+    getUserPhotos();
+  }, [username]);
 
   return (
     <>
@@ -50,17 +85,21 @@ const Home: NextPage = () => {
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
         <div className="sm:col-span-2">
-          <div className="mb-5 mt-2.5">
-            <form onSubmit={getUserPhotos}>
+          <div className="mb-5 mt-2.5 flex w-full flex-auto">
+            <form className="w-full" onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="email"
                 placeholder="Enter Instagram username"
-                onChange={(e) => setUsername(e.target.value)}
+                value={usernameField}
+                onChange={(e) => setUsernameField(e.target.value)}
                 id="email"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-4xl sm:leading-6"
+                className="w-full rounded-md border-0 px-3.5 py-2 text-4xl text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
               />
             </form>
+            <div className="m-auto ml-4 w-52">
+              <WalletMultiButtonDynamic className="btn-ghost btn-sm relative flex text-4xl md:hidden" />
+            </div>
           </div>
         </div>
         {loading && (
@@ -100,10 +139,8 @@ const Home: NextPage = () => {
                 alt="selected image"
                 className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
                 style={{ transform: "translate3d(0, 0, 0)" }}
-                placeholder="blur"
                 id={id}
                 src={media_url}
-                blurDataURL={media_url}
                 width={720}
                 height={480}
                 sizes="(max-width: 640px) 100vw,
