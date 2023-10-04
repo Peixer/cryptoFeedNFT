@@ -2,6 +2,8 @@ import Replicate from "replicate";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
+export const maxDuration = 300;
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
