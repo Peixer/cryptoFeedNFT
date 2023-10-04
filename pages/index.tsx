@@ -31,10 +31,11 @@ const Home: NextPage = () => {
       router.push("/");
       return;
     }
-    getUserPhotos();
   }
 
-  const getUserPhotos = useCallback(async () => {
+  const getUserPhotos = useCallback(async (username) => {
+    if (!username) return;
+
     setLoading(true);
     const mediaResponse = await axios.get(`/api/medias?username=${username}`);
 
@@ -67,7 +68,7 @@ const Home: NextPage = () => {
       setImages([]);
       return;
     }
-    getUserPhotos();
+    getUserPhotos(username);
   }, [username]);
 
   return (
