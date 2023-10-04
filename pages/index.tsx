@@ -21,12 +21,13 @@ const Home: NextPage = () => {
 
     const [images, setImages] = useState<ImageProps[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
+    const [usernameField, setUsernameField] = useState<string>(initialUsername);
     const [username, setUsername] = useState<string>(initialUsername);
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        router.push(`/?username=${username}`, undefined);
-        if (!username) {
+        router.push(`/?username=${usernameField}`, undefined);
+        if (!usernameField) {
             setImages([]);
             router.push("/");
             return;
@@ -93,8 +94,8 @@ const Home: NextPage = () => {
                                 type="text"
                                 name="email"
                                 placeholder="Enter Instagram username"
-                                onChange={(e) => setUsername(e.target.value)}
-                                value={username}
+                                value={usernameField}
+                                onChange={(e) => setUsernameField(e.target.value)}
                                 id="email"
                                 className="block w-full rounded-md border-0 px-3.5 py-2 text-4xl text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
                             />
