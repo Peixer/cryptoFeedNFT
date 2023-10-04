@@ -19,8 +19,8 @@ function MintButton({ media_url }: MintButtonProps) {
     const { publicKey } = wallet;
 
     const metadata = {
-        name: "AI Generated NFT",
-        symbol: "AINFT",
+        name: "Generated NFT",
+        symbol: "CFNFT",
         description: "This NFT was generated using Stable Diffusion",
         image: media_url,
         creators: [{ address: publicKey, share: 100 }],
