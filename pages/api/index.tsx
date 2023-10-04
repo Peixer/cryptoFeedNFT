@@ -12,10 +12,11 @@ export default async function handler(
     });
 
     const output = await replicate.run(
-      "stability-ai/sdxl:af1a68a271597604546c09c64aabcd7782c114a63539a4a8d14d1eeda5630c33",
+      "fofr/sdxl-barbie:657c074cdd0e0098e39dae981194c4e852ad5bc88c7fbbeb0682afae714a6b0e",
       {
         input: {
-          prompt: "cartoon style with nostalgic pixel art look",
+          prompt: "A photo in the style of TOK",
+          negative_prompt: "underexposed",
           image: req.body.media_url,
         },
       }
