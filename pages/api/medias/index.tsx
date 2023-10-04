@@ -7,8 +7,8 @@ import { mockJson } from "../../../utils/constants";
 const handler = async (req: any, res: NextApiResponse) => {
   const username = req.query.username;
   let mediasResponse = {} as any;
-  let useMockJson = true;
-  if (useMockJson) {
+  let useMockJson = false;
+  if (process.env.NODE_ENV === "development") {
     res.status(200).json({ medias: mockJson });
   } else {
     mediasResponse = await axios.get(
