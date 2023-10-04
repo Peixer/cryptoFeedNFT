@@ -10,7 +10,7 @@ class MyDocument extends Document {
             name="description"
             content="See pictures from Crypto Feed NFT"
           />
-          <meta property="og:site_name" content="nextjsconf-pics.vercel.app" />
+          <meta property="og:site_name" content="https://www.cryptofeednft.com" />
           <meta
             property="og:description"
             content="See pictures from Crypto Feed NFT"

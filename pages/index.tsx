@@ -41,11 +41,11 @@ const Home: NextPage = () => {
         <title>Crypto Feed NFT</title>
         <meta
           property="og:image"
-          content="https://nextjsconf-pics.vercel.app/og-image.png"
+          content="https://www.cryptofeednft.com/logo.png"
         />
         <meta
           name="twitter:image"
-          content="https://nextjsconf-pics.vercel.app/og-image.png"
+          content="https://www.cryptofeednft.com/logo.png"
         />
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
