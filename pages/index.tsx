@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   async function getUserPhotos(e) {
     e.preventDefault();
     setLoading(true);
-    const mediaResponse = await axios.get(`/api/medias?username=${username}}`);
+    const mediaResponse = await axios.get(`/api/medias?username=${username}`);
 
     if (mediaResponse.data) {
       setImages(
