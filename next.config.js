@@ -13,6 +13,10 @@ module.exports = {
       },
       {
         protocol: "https",
+        hostname: "**.fna.fbcdn.net",
+      },
+      {
+        protocol: "https",
         hostname: "**.replicate.delivery",
       },
     ],

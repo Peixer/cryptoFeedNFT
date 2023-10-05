@@ -22,7 +22,7 @@ const handler = async (req: any, res: NextApiResponse) => {
     );
 
     const mediaUrls =
-      mediasResponse.data.graphql.user.edge_owner_to_timeline_media.edges.map(
+      mediasResponse.data.graphql.user.edge_owner_to_timeline_media.edges.filter(media => media.node.display_url).map(
         (media) => {
           return {
             url: media.node.display_url,
