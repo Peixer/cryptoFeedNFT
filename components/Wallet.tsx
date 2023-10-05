@@ -21,10 +21,10 @@ type Props = {
 
 export const Wallet: FC<Props> = ({ children }) => {
     // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-    const network = WalletAdapterNetwork.Devnet;
+    const network = process.env.NEXT_PUBLIC_SOLANA_NETWORK as WalletAdapterNetwork;
 
     // You can also provide a custom RPC endpoint.
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+    const endpoint = useMemo(() => process.env.NEXT_PUBLIC_CUSTOM_RPC_URL ?? clusterApiUrl(network), [network]);
 
     const wallets = useMemo(
         () => [new PhantomWalletAdapter()],
