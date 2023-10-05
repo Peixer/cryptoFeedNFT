@@ -7,7 +7,6 @@ import {
     bundlrStorage,
     walletAdapterIdentity,
 } from "@metaplex-foundation/js";
-import { Connection, clusterApiUrl, Keypair } from "@solana/web3.js";
 
 interface MintButtonProps {
     media_url: string;
@@ -17,11 +16,13 @@ function MintButton({ media_url }: MintButtonProps) {
     const { connection } = useConnection();
     const wallet = useWallet();
     const { publicKey } = wallet;
+    const description = localStorage.getItem("description");
 
     const metadata = {
         name: "Generated NFT",
         symbol: "CFNFT",
-        description: "This NFT was generated using Stable Diffusion",
+        description: `${description}. 
+        Powered by CryptoFeedNFT.`,
         image: media_url,
         creators: [{ address: publicKey, share: 100 }],
     };
@@ -29,12 +30,8 @@ function MintButton({ media_url }: MintButtonProps) {
     async function mintOne() {
         if (!publicKey) throw new WalletNotConnectedError();
 
-        const lamports = await connection.getMinimumBalanceForRentExemption(0);
-
         const metaplex = Metaplex.make(connection)
-            // set our keypair to use, and pay for the transaction
             .use(walletAdapterIdentity(wallet))
-            // define a storage mechanism to upload with
             .use(
                 bundlrStorage({
                     address: "https://devnet.bundlr.network",
@@ -52,10 +49,7 @@ function MintButton({ media_url }: MintButtonProps) {
             uri,
             name: metadata.name,
             symbol: metadata.symbol,
-
-            // `sellerFeeBasisPoints` is the royalty that you can define on nft
             sellerFeeBasisPoints: 500, // Represents 5.00%.
-
             isMutable: true,
         });
 

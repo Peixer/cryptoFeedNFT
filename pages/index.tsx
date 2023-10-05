@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   const router = useRouter();
   const initialUsername = (router.query.username as string) ?? "";
 
-  const [images, setImages] = useState<ImageProps[]>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [usernameField, setUsernameField] = useState<string>(initialUsername);
   const [username, setUsername] = useState<string>(initialUsername);
@@ -46,11 +46,9 @@ const Home: NextPage = () => {
           .map((item: any, index) => {
             return {
               id: index,
-              media_url: item,
-              media_type: "",
-              username: "",
-              timestamp: "",
-            } as ImageProps;
+              media_url: item.url,
+              description: item.description,
+            };
           })
       );
     }
@@ -61,6 +59,7 @@ const Home: NextPage = () => {
     const queryUsername = router.query.username as string;
     if (!queryUsername) return setUsername("");
     setUsername(queryUsername);
+    setUsernameField(queryUsername);
   }, [router.query.username]);
 
   useEffect(() => {
@@ -129,10 +128,13 @@ const Home: NextPage = () => {
           </div>
         )}
         <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-          {images.map(({ id, media_url }) => (
+          {images.map(({ id, media_url, description }) => (
             <Link
               key={id}
               href={`/p/?media_url=${encodeURIComponent(media_url)}`}
+              onClick={(e) => {
+                localStorage.setItem("description", description);
+              }}
               shallow
               className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
             >
