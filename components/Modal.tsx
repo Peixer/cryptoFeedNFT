@@ -13,7 +13,6 @@ export default function Modal({
     media_url: string;
     onClose?: () => void;
 }) {
-    let overlayRef = useRef();
     const router = useRouter();
     const [media, setMedia] = useState(media_url);
     const { generateAIImage, isLoading } = useReplicate(media_url, (output) => {
@@ -29,33 +28,36 @@ export default function Modal({
         <Dialog
             open={true}
             onClose={handleClose}
-            initialFocus={overlayRef}
             className="fixed inset-0 z-10 mx-auto flex max-w-[512px] flex-col items-center justify-center"
         >
             <Dialog.Panel className="relative rounded-3xl border border-white/10 bg-white/10 p-8">
-                <Image
-                    alt="Next.js Conf photo"
-                    className={`z-40 mb-5 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
-                        isLoading ? "brightness-50" : "brightness-90"
-                    }`}
-                    style={{ transform: "translate3d(0, 0, 0)" }}
-                    placeholder="blur"
-                    src={media}
-                    blurDataURL={media}
-                    width={720}
-                    height={480}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
-                />
-                {isLoading && (
-                    <ClipLoader
-                        className="absolute inset-0 mx-auto my-auto"
-                        color="#FFF"
+                <Dialog.Title className="mb-5 text-2xl font-bold text-white">
+                    Generate AI Art from Your Photo
+                </Dialog.Title>
+                <div className="relative">
+                    <Image
+                        alt="Next.js Conf photo"
+                        className={`z-40 mb-5 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
+                            isLoading ? "brightness-50" : "brightness-90"
+                        }`}
+                        style={{ transform: "translate3d(0, 0, 0)" }}
+                        placeholder="blur"
+                        src={media}
+                        blurDataURL={media}
+                        width={720}
+                        height={480}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
                     />
-                )}
+                    {isLoading && (
+                        <ClipLoader
+                            className="absolute inset-0 mx-auto my-auto"
+                            color="#FFF"
+                        />
+                    )}
+                </div>
                 <div className="flex flex-col gap-y-4">
                     <button
                         onClick={generateAIImage}
-                        // className="w-full rounded-lg bg-gradient-to-r from-purple-300 to-pink-200 py-4 text-xl font-medium text-black"
                         className="w-full rounded-lg border border-white/25 bg-gradient-to-r py-4 text-xl font-medium text-white/50"
                     >
                         Generate Image
