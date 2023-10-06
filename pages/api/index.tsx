@@ -22,11 +22,11 @@ export default async function handler(
           "fofr/sdxl-barbie:657c074cdd0e0098e39dae981194c4e852ad5bc88c7fbbeb0682afae714a6b0e",
       },
       {
-        id: "sdxl",
-        prompt: "A photo in the style of TOK",
+        id: "cartoonify",
+        prompt: "",
         negative_prompt: "",
         model:
-          "stability-ai/sdxl:1bfb924045802467cf8869d96b231a12e6aa994abfe37e337c63a4e49a8c6c41",
+          "catacolabs/cartoonify:f109015d60170dfb20460f17da8cb863155823c85ece1115e1e9e4ec7ef51d3b",
       },
       {
         id: "emoji",

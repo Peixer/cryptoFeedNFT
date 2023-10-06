@@ -53,7 +53,7 @@ export default function Modal({ media_url }: { media_url: string }) {
     { id: "barbie", title: "Barbie" },
     { id: "emoji", title: "Emoji" },
     { id: "notion", title: "Notion Style" },
-    { id: "sdxl", title: "SDXL" },
+    { id: "cartoonify", title: "Cartoonify" },
   ];
 
   function handleClose() {

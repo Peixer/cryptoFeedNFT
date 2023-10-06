@@ -4,7 +4,7 @@ module.exports = {
       "res.cloudinary.com",
       "scontent.cdninstagram.com",
       "cdninstagram.com",
-      "pbxt.replicate.delivery"
+      "replicate.delivery"
     ],
     remotePatterns: [
       {
