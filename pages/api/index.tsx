@@ -26,7 +26,7 @@ export default async function handler(
         prompt: "",
         negative_prompt: "",
         model:
-          "catacolabs/cartoonify:f109015d60170dfb20460f17da8cb863155823c85ece1115e1e9e4ec7ef51d3b",
+          "412392713/vtoonify:afe9ed6158e2a956b3198db1cf90ce83fb403eb43fe76a78c80494c7c9a82a56",
       },
       {
         id: "emoji",
