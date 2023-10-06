@@ -11,8 +11,19 @@ const handler = async (req: any, res: NextApiResponse) => {
   if (process.env.NODE_ENV === "development") {
     res.status(200).json({ medias: mockJson });
   } else {
+
+    const profileInfo = await axios.get(
+      `https://api.hikerapi.com/v1/user/by/username?username=${username}`,
+      {
+        headers: {
+          accept: "application/json",
+          "x-access-key": process.env.HIKER_API_CLIENTSECRET,
+        },
+      }
+    );
+
     mediasResponse = await axios.get(
-      `https://api.hikerapi.com/a2/user?username=${username}`,
+      `https://api.hikerapi.com/v1/user/medias/chunk?user_id=${profileInfo.data.pk}`,
       {
         headers: {
           accept: "application/json",
@@ -22,12 +33,12 @@ const handler = async (req: any, res: NextApiResponse) => {
     );
 
     const mediaUrls =
-      mediasResponse.data.graphql.user.edge_owner_to_timeline_media.edges.filter(media => media.node.display_url).map(
+      mediasResponse.data[0].filter(media => media.image_versions && media.image_versions.length > 1).map(
         (media) => {
           return {
-            url: media.node.display_url,
+            url: media.image_versions[1].url,
             description:
-              media.node.edge_media_to_caption?.edges[0]?.node?.text ?? "",
+              media.caption_text ?? "",
           };
         }
       );
