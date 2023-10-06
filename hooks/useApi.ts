@@ -9,13 +9,14 @@ export function useReplicate(
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const generateAIImage = useCallback(async () => {
+    const generateAIImage = useCallback(async (selected) => {
         if (!media_url) return;
         try {
             setError(false);
             setIsLoading(true);
             const response = await axios.post("/api", {
                 media_url,
+                model : selected
             });
             const output = response.data.output;
 

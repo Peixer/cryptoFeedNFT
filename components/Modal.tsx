@@ -1,10 +1,45 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { useReplicate } from "../hooks/useApi";
 import MintButton from "./MintButton";
+
+function RadioGroups({
+  setSelected,
+  models,
+}: {
+  setSelected: any;
+  models: any[];
+}) {
+  return (
+    <div>
+      <fieldset className="m-4">
+        <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+          {models.map(({ id, title }) => (
+            <div key={id} className="flex items-center">
+              <input
+                id={id}
+                name="notification-method"
+                type="radio"
+                defaultChecked={id === "barbie"}
+                onChange={(e) => setSelected(id)}
+                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+              />
+              <label
+                htmlFor={id}
+                className="ml-3 block text-sm font-medium leading-6 text-white"
+              >
+                {title}
+              </label>
+            </div>
+          ))}
+        </div>
+      </fieldset>
+    </div>
+  );
+}
 
 export default function Modal({ media_url }: { media_url: string }) {
   const router = useRouter();
@@ -12,6 +47,14 @@ export default function Modal({ media_url }: { media_url: string }) {
   const { generateAIImage, isLoading } = useReplicate(media_url, (output) => {
     setMedia(output);
   });
+
+  const [selected, setSelected] = useState("barbie");
+  const models = [
+    { id: "barbie", title: "Barbie" },
+    { id: "emoji", title: "Emoji" },
+    { id: "notion", title: "Notion Style" },
+    { id: "sdxl", title: "SDXL" },
+  ];
 
   function handleClose() {
     router.back();
@@ -48,9 +91,10 @@ export default function Modal({ media_url }: { media_url: string }) {
             />
           )}
         </div>
+        <RadioGroups setSelected={setSelected} models={models} />
         <div className="flex flex-col gap-y-4">
           <button
-            onClick={generateAIImage}
+            onClick={() => generateAIImage(selected)}
             className="w-full rounded-lg border border-white/25 bg-gradient-to-r py-4 text-xl font-medium text-white/50"
           >
             Generate Image
