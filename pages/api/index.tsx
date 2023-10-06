@@ -26,11 +26,11 @@ export default async function handler(
         prompt: "",
         negative_prompt: "",
         model:
-          "412392713/vtoonify:afe9ed6158e2a956b3198db1cf90ce83fb403eb43fe76a78c80494c7c9a82a56",
+          "catacolabs/cartoonify:f109015d60170dfb20460f17da8cb863155823c85ece1115e1e9e4ec7ef51d3b",
       },
       {
         id: "emoji",
-        prompt: "A TOK emoji of a man",
+        prompt: "A TOK emoji of a person",
         negative_prompt: "",
         model:
           "fofr/sdxl-emoji:dee76b5afde21b0f01ed7925f0665b7e879c50ee718c5f78a9d38e04d523cc5e",
@@ -58,7 +58,14 @@ export default async function handler(
       }
     );
 
-    res.status(200).json({ message: "Sucess", output: output[0] });
+    console.log("output", output);
+
+    res
+      .status(200)
+      .json({
+        message: "Sucess",
+        output: Array.isArray(output) ? output[0] : output,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error", output: error });
