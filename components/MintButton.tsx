@@ -10,9 +10,10 @@ import {
 
 interface MintButtonProps {
   media_url: string;
+  setShow: any;
 }
 
-function MintButton({ media_url }: MintButtonProps) {
+function MintButton({ media_url, setShow }: MintButtonProps) {
   const { connection } = useConnection();
   const wallet = useWallet();
   const { publicKey } = wallet;
@@ -60,6 +61,8 @@ function MintButton({ media_url }: MintButtonProps) {
 
     console.log(nft);
     console.log({ txSignature: response.signature });
+
+    setShow(true);
   }
 
   return (

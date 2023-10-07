@@ -44,10 +44,10 @@ export default function Notification({
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">
-                      Successfully generated!
+                      Successfully generated/minted!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      New AI image has been generated.
+                      New AI image has been generated/minted.
                     </p>
                   </div>
                 </div>

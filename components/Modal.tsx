@@ -47,6 +47,7 @@ export default function Modal({ media_url }: { media_url: string }) {
   const [media, setMedia] = useState(media_url);
   const { generateAIImage, isLoading } = useReplicate(media_url, (output) => {
     setMedia(output);
+    setShow(true);
   });
   const [show, setShow] = useState(false);
 
@@ -101,7 +102,7 @@ export default function Modal({ media_url }: { media_url: string }) {
           >
             Generate Image
           </button>
-          <MintButton media_url={media} />
+          <MintButton media_url={media} setShow={setShow} />
         </div>
       </Dialog.Panel>
       <Notification setShow={setShow} show={show} />
