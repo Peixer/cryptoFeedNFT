@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "https": "next dev --experimental-https"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",

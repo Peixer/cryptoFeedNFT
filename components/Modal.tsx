@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { useReplicate } from "../hooks/useApi";
 import MintButton from "./MintButton";
+import Notification from "../components/Notification";
 
 function RadioGroups({
   setSelected,
@@ -47,6 +48,7 @@ export default function Modal({ media_url }: { media_url: string }) {
   const { generateAIImage, isLoading } = useReplicate(media_url, (output) => {
     setMedia(output);
   });
+  const [show, setShow] = useState(false);
 
   const [selected, setSelected] = useState("barbie");
   const models = [
@@ -102,6 +104,7 @@ export default function Modal({ media_url }: { media_url: string }) {
           <MintButton media_url={media} />
         </div>
       </Dialog.Panel>
+      <Notification setShow={setShow} show={show} />
     </Dialog>
   );
 }
