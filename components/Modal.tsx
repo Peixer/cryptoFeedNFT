@@ -76,7 +76,7 @@ export default function Modal({ media_url }: { media_url: string }) {
         <div className="relative max-h-[300px]">
           <Image
             alt="Next.js Conf photo"
-            className={`z-40 mb-5 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
+            className={`z-40 mb-5 transform rounded-lg transition will-change-auto group-hover:brightness-110 max-h-[300px] ${
               isLoading ? "brightness-50" : "brightness-90"
             }`}
             style={{ transform: "translate3d(0, 0, 0)" }}
