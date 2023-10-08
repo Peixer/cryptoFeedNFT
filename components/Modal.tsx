@@ -67,7 +67,7 @@ export default function Modal({ media_url }: { media_url: string }) {
     <Dialog
       open={true}
       onClose={handleClose}
-      className="fixed inset-0 z-10 mx-auto flex max-w-[512px] flex-col items-center justify-center"
+      className="fixed inset-0 z-10 mx-auto flex max-w-[512px] flex-col items-center justify-center p-6 sm:p-0"
     >
       <Dialog.Panel className="relative rounded-3xl border border-white/10 bg-white/10 p-8">
         <Dialog.Title className="mb-5 text-center text-2xl font-bold text-white">
