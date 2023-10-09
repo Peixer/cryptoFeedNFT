@@ -94,11 +94,11 @@ const Home: NextPage = () => {
                 value={usernameField}
                 onChange={(e) => setUsernameField(e.target.value)}
                 id="email"
-                className="w-full rounded-md border-0 px-3.5 py-2 text-4xl text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
+                className="w-full rounded-md border-0 px-2.5 py-2.5 text-lg text-gray-900 shadow-md  placeholder:text-gray-400 focus:outline-none sm:leading-6"
               />
             </form>
-            <div className="sm:m-auto mt-2.5 sm:ml-4 w-52">
-              <WalletMultiButtonDynamic className="btn-ghost btn-sm relative flex text-4xl md:hidden" />
+            <div className="sm:m-auto sm:ml-4 mt-2.5 w-52">
+              <WalletMultiButtonDynamic className="btn-ghost btn-sm relative flex text-3xl md:hidden" />
             </div>
           </div>
         </div>
@@ -108,21 +108,18 @@ const Home: NextPage = () => {
               className="-ml-1 mr-3 h-10 w-10 animate-spin text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <circle
                 className="opacity-25"
                 cx="12"
                 cy="12"
                 r="10"
                 stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
+                strokeWidth="4"></circle>
               <path
                 className="opacity-75"
                 fill="currentColor"
-                d="M4 12a8 8 0 018-8v2a6 6 0 00-6 6z"
-              ></path>
+                d="M4 12a8 8 0 018-8v2a6 6 0 00-6 6z"></path>
             </svg>
             <span className="text-white">Loading...</span>
           </div>
@@ -136,8 +133,7 @@ const Home: NextPage = () => {
                 localStorage.setItem("description", description);
               }}
               shallow
-              className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
-            >
+              className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight">
               <Image
                 alt="selected image"
                 className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
