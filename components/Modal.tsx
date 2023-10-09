@@ -30,8 +30,7 @@ function RadioGroups({
               />
               <label
                 htmlFor={id}
-                className="ml-3 block text-sm font-medium leading-6 text-white"
-              >
+                className="ml-3 block text-sm font-medium leading-6 text-white">
                 {title}
               </label>
             </div>
@@ -67,16 +66,15 @@ export default function Modal({ media_url }: { media_url: string }) {
     <Dialog
       open={true}
       onClose={handleClose}
-      className="fixed inset-0 z-10 mx-auto flex max-w-[512px] flex-col items-center justify-center"
-    >
-      <Dialog.Panel className="relative rounded-3xl border border-white/10 bg-white/10 p-8">
-        <Dialog.Title className="mb-5 text-center text-2xl font-bold text-white">
+      className="fixed inset-0 z-10 mx-auto flex flex-col items-center justify-center px-10">
+      <Dialog.Panel className="relative w-full max-w-screen-sm rounded-3xl border  border-white/10  bg-white/10 bg-zinc-800 px-16 py-14 ">
+        <Dialog.Title className="mb-2 text-center text-2xl font-bold text-white sm:mb-5">
           Generate AI Art from Your Photo ✨
         </Dialog.Title>
-        <div className="relative">
+        <div className="relative h-52 w-full sm:h-auto">
           <Image
             alt="Next.js Conf photo"
-            className={`z-40 mb-5 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
+            className={`z-40 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
               isLoading ? "brightness-50" : "brightness-90"
             }`}
             style={{ transform: "translate3d(0, 0, 0)" }}
@@ -86,6 +84,8 @@ export default function Modal({ media_url }: { media_url: string }) {
             width={720}
             height={480}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
+            // layout="fill" // Make the image fill its container
+            // objectFit="contain"
           />
           {isLoading && (
             <ClipLoader
@@ -95,11 +95,10 @@ export default function Modal({ media_url }: { media_url: string }) {
           )}
         </div>
         <RadioGroups setSelected={setSelected} models={models} />
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col items-center  justify-center gap-y-4">
           <button
             onClick={() => generateAIImage(selected)}
-            className="w-full rounded-lg border border-white/25 bg-gradient-to-r py-4 text-xl font-medium text-white/50"
-          >
+            className="text-medium w-full rounded-lg bg-gradient-to-tl from-violet-600 to-violet-400 py-3 font-medium text-slate-200 hover:bg-gradient-to-tl hover:from-violet-700 hover:to-violet-500 ">
             Generate Image
           </button>
           <MintButton media_url={media} setShow={setShow} />

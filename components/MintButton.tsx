@@ -31,8 +31,9 @@ function MintButton({ media_url, setShow }: MintButtonProps) {
   async function mintOne() {
     if (!publicKey) throw new WalletNotConnectedError();
 
-    const metaplex = Metaplex.make(connection)
-      .use(walletAdapterIdentity(wallet));
+    const metaplex = Metaplex.make(connection).use(
+      walletAdapterIdentity(wallet)
+    );
 
     if (process.env.NEXT_PUBLIC_SOLANA_NETWORK === "devnet") {
       metaplex.use(
@@ -67,9 +68,8 @@ function MintButton({ media_url, setShow }: MintButtonProps) {
 
   return (
     <button
-      className="w-full rounded-lg bg-gradient-to-r from-purple-300 to-pink-200 py-4 text-xl font-semibold text-black"
-      onClick={mintOne}
-    >
+      className="text-medium w-full rounded-lg bg-gradient-to-tl from-violet-600 to-violet-400 py-3 font-semibold text-slate-200 hover:bg-gradient-to-tl hover:from-violet-700 hover:to-violet-500"
+      onClick={mintOne}>
       Mint now
     </button>
   );

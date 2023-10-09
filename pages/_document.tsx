@@ -10,7 +10,10 @@ class MyDocument extends Document {
             name="description"
             content="See pictures from Crypto Feed NFT"
           />
-          <meta property="og:site_name" content="https://www.cryptofeednft.com" />
+          <meta
+            property="og:site_name"
+            content="https://www.cryptofeednft.com"
+          />
           <meta
             property="og:description"
             content="See pictures from Crypto Feed NFT"
@@ -23,12 +26,12 @@ class MyDocument extends Document {
             content="See pictures from Crypto Feed NFT"
           />
         </Head>
-        <body className="bg-black antialiased">
+        <body className="bg-gradient-to-r from-violet-600 to-violet-400">
           <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
