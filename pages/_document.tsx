@@ -1,4 +1,4 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   render() {
@@ -26,7 +26,7 @@ class MyDocument extends Document {
             content="See pictures from Crypto Feed NFT"
           />
         </Head>
-        <body className="bg-gradient-to-r from-violet-600 to-violet-400">
+        <body>
           <Main />
           <NextScript />
         </body>
@@ -35,4 +35,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument
+export default MyDocument;

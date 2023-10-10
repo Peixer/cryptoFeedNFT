@@ -9,7 +9,6 @@ import Waitlist from "../components/Waitlist";
 import { NextUIProvider } from "@nextui-org/system";
 
 const Home: NextPage = () => {
-
   return (
     <NextUIProvider>
       <Navbar />
