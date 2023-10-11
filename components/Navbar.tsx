@@ -20,7 +20,7 @@ export default function App() {
     <Navbar shouldHideOnScroll isBordered className="bg-transparent">
       <NavbarBrand>
         <p className="font-bold  tracking-wider text-transparent bg-clip-text bg-gradient-to-tl from-violet-600 to-violet-400 ">
-          CryptoFeed
+          Crypto Feed
         </p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -42,10 +42,10 @@ export default function App() {
           <Button
             as={Link}
             color="secondary"
-            href="#waitlist"
+            href="/app"
             variant="shadow"
             className="smooth-scroll">
-            Join Waitlist
+            Check it out!
           </Button>
         </NavbarItem>
       </NavbarContent>

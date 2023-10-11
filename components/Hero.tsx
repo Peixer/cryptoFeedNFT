@@ -17,15 +17,6 @@ const Hero = () => {
             Minting NFTs never been easier before. We present you a no code
             solution for grandpas powered with AI.
           </p>
-          <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-            <Button
-              color="secondary"
-              variant="shadow"
-              as={Link}
-              href="#waitlist">
-              Join Waitlist Now
-            </Button>
-          </div>
         </div>
         <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
           <img
@@ -38,5 +29,6 @@ const Hero = () => {
     </section>
   );
 };
+
 
 export default Hero;

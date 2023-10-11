@@ -8,7 +8,7 @@ export default function Roadmap() {
           </p>
           <p className="block antialiased text-lg font-normal leading-relaxed text-slate-50 mx-auto w-full px-4 md:w-10/12 lg:w-7/12 lg:px-8">
             This roadmap lets everyone know what we planned for the future of
-            this project. Check it out!
+            this project. 
           </p>
         </div>
         <div className="container mb-28 ">
