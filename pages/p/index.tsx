@@ -7,7 +7,7 @@ const ModalPage: NextPage = () => {
   const { media_url } = router.query;
   return (
     <>
-      <main className="mx-auto max-w-[1960px] p-4">
+      <main className="mx-auto max-h-[1960px]">
         <Modal media_url={media_url as string} />
       </main>
     </>

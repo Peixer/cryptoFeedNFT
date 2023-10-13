@@ -36,3 +36,6 @@ next-env.d.ts
 
 .env
 certificates
+yarn.lock
+package.json 
+package-lock.json

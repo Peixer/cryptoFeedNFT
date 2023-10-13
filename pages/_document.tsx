@@ -26,7 +26,7 @@ class MyDocument extends Document {
             content="See pictures from Crypto Feed NFT"
           />
         </Head>
-        <body>
+        <body className="bg-background dark">
           <Main />
           <NextScript />
         </body>

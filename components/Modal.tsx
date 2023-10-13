@@ -16,7 +16,7 @@ function RadioGroups({
 }) {
   return (
     <div>
-      <fieldset className="m-4">
+      <fieldset className="m-2">
         <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
           {models.map(({ id, title }) => (
             <div key={id} className="flex items-center">
@@ -66,23 +66,23 @@ export default function Modal({ media_url }: { media_url: string }) {
     <Dialog
       open={true}
       onClose={handleClose}
-      className="fixed inset-0 z-10 mx-auto flex flex-col items-center justify-center px-10">
-      <Dialog.Panel className="relative w-full max-w-screen-sm rounded-3xl border  border-white/10  bg-white/10 bg-zinc-800 px-16 py-14 ">
+      className="fixed inset-0 z-10 mx-auto flex flex-col items-center justify-center bg-gradient-to-tr from-violet-500 to-violet-400 ">
+      <Dialog.Panel className="relative w-full max-w-screen-sm rounded-3xl border  border-white/10  bg-white/10 bg-zinc-800 px-6 py-16 ">
         <Dialog.Title className="mb-2 text-center text-2xl font-bold text-white sm:mb-5">
           Generate AI Art from Your Photo ✨
         </Dialog.Title>
-        <div className="relative h-52 w-full sm:h-auto max-h-[300px]">
+        <div className="relative h-auto w-full">
           <Image
             alt="Next.js Conf photo"
-            className={`z-40 transform rounded-lg transition will-change-auto group-hover:brightness-110 max-h-[300px] ${
+            className={`z-40 h-64 w-64 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
               isLoading ? "brightness-50" : "brightness-90"
             }`}
             style={{ transform: "translate3d(0, 0, 0)" }}
             placeholder="blur"
             src={media}
             blurDataURL={media}
-            width={720}
-            height={480}
+            width={640}
+            height={640}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
           />
           {isLoading && (
@@ -96,7 +96,7 @@ export default function Modal({ media_url }: { media_url: string }) {
         <div className="flex flex-col items-center  justify-center gap-y-4">
           <button
             onClick={() => generateAIImage(selected)}
-            className="text-medium w-full rounded-lg bg-gradient-to-tl from-violet-600 to-violet-400 py-3 font-medium text-slate-200 hover:bg-gradient-to-tl hover:from-violet-700 hover:to-violet-500 ">
+            className="w-full rounded-lg bg-gradient-to-tl from-violet-600 to-violet-400 py-3 text-medium font-medium text-slate-200 hover:bg-gradient-to-tl hover:from-violet-700 hover:to-violet-500 ">
             Generate Image
           </button>
           <MintButton media_url={media} setShow={setShow} />
