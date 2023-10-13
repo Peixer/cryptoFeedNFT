@@ -71,10 +71,10 @@ export default function Modal({ media_url }: { media_url: string }) {
         <Dialog.Title className="mb-2 text-center text-2xl font-bold text-white sm:mb-5">
           Generate AI Art from Your Photo ✨
         </Dialog.Title>
-        <div className="relative h-auto w-full">
+        <div className="relative h-auto w-full flex justify-center items-center">
           <Image
             alt="Next.js Conf photo"
-            className={`z-40 h-64 w-64 transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
+            className={`z-40 h-auto w-auto transform rounded-lg transition will-change-auto group-hover:brightness-110 ${
               isLoading ? "brightness-50" : "brightness-90"
             }`}
             style={{ transform: "translate3d(0, 0, 0)" }}
